@@ -3,7 +3,12 @@ import numpy as np
 import pandas as pd
 from sklearn.preprocessing import MinMaxScaler
 from tensorflow.keras.models import load_model
+import plotly.express as px
 import plotly.graph_objects as go
+from streamlit_ace import st_ace
+
+# Install additional libraries
+!pip install animate.css
 
 # Load the model
 model = load_model('lstm_model_final.h5')
@@ -28,9 +33,9 @@ def predict_next_month(data, model, scaler, seq_length):
 # Streamlit app
 def main():
     st.set_page_config(
-        page_title='Demand Forecasting',
+        page_title='Demand forecasting',
         layout='wide',
-        initial_sidebar_state='collapsed',
+        initial_sidebar_state='expanded',
         page_icon=":chart_with_upwards_trend:"
     )
 
@@ -40,37 +45,28 @@ def main():
     body {
         background-color: #f0f2f5;
     }
-    .stTitle {
-        color: #F63366;
-        font-size: 48px;
-        margin-bottom: 50px;
-    }
-    .stText {
-        color: #1E88E5;
-        font-size: 20px;
-        margin-bottom: 30px;
-    }
     .stButton button {
         background-color: #F63366;
         color: white;
         border-color: #F63366;
-        border-radius: 5px;
-        font-size: 16px;
-        padding: 10px 20px;
-        margin-top: 20px;
     }
     .stButton button:hover {
         background-color: #ED125B;
         border-color: #ED125B;
+    }
+    .stDataFrame {
+        background-color: white;
+        border: 1px solid #D3D3D3;
+        border-radius: 5px;
+        padding: 10px;
     }
     </style>
     '''
     st.markdown(page_bg, unsafe_allow_html=True)
 
     # App title and description
-    st.title('Demand Forecasting')
+    st.title('Monthly Order Demand Forecasting')
     st.markdown("Forecast future order demand using LSTM model")
-    st.markdown("---")
 
     # Sidebar
     st.sidebar.subheader("Settings")
@@ -104,20 +100,37 @@ def main():
             title='Forecasted Order Demand Over Time',
             xaxis_title='Date',
             yaxis_title='Order Demand',
-            plot_bgcolor='rgba(0,0,0,0)',
-            paper_bgcolor='#f0f2f5',
-            font_color='black',
-            margin=dict(l=50, r=50, t=50, b=50)
+            plot_bgcolor='white',
+            paper_bgcolor='rgba(0,0,0,0)',
+            font_color='black'
         )
         st.plotly_chart(fig)
 
     # About section
-    st.sidebar.markdown("---")
-    st.sidebar.subheader("About")
-    st.sidebar.markdown("The purpose of this app is to forecast the monthly order demand using an LSTM model.")
-    st.sidebar.markdown("It addresses order shortage issues related to ocean shipping, where orders can take months or weeks to arrive.")
-    st.sidebar.markdown("To use the app, enter the number of months to forecast in the sidebar and click the 'Predict' button.")
-    st.sidebar.markdown("The app will generate forecasted values and display a graph for visualization.")
+    st.markdown("---")
+    st.subheader("About")
+    st.markdown("The purpose of this app is to forecast the monthly order demand using an LSTM model.")
+    st.markdown("It addresses order shortage issues related to ocean shipping, where orders can take months or weeks to arrive.")
+    st.markdown("To use the app, enter the number of months to forecast in the sidebar and click the 'Predict' button.")
+    st.markdown("The app will generate forecasted values and display graphs for visualization.")
+
+    # Footer
+    st.markdown("---")
+    st.subheader("Developed by Gangadhar")
+    st.markdown("Check out the [GitHub repository](https://github.com/your-username/your-repo) for the source code.")
+
+    # Code highlighting with streamlit_ace
+    st.subheader("Source Code")
+    st_ace(
+        value=open(__file__, 'r').read(),
+        language="python",
+        theme="github",
+        keybinding="vscode",
+        show_gutter=False,
+        font_size=14,
+        use_wrap_mode=True,
+        wrap=True
+    )
 
 if __name__ == '__main__':
     main()

@@ -8,3 +8,4 @@ seaborn
 plotly
 tensorflow
 keras
+streamlit_ace 
