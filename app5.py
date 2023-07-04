@@ -3,7 +3,6 @@ import numpy as np
 import pandas as pd
 from sklearn.preprocessing import MinMaxScaler
 from tensorflow.keras.models import load_model
-import plotly.express as px
 import plotly.graph_objects as go
 
 # Load the model
@@ -29,9 +28,9 @@ def predict_next_month(data, model, scaler, seq_length):
 # Streamlit app
 def main():
     st.set_page_config(
-        page_title='Demand forecasting',
+        page_title='Demand Forecasting',
         layout='wide',
-        initial_sidebar_state='expanded',
+        initial_sidebar_state='collapsed',
         page_icon=":chart_with_upwards_trend:"
     )
 
@@ -41,28 +40,37 @@ def main():
     body {
         background-color: #f0f2f5;
     }
+    .stTitle {
+        color: #F63366;
+        font-size: 48px;
+        margin-bottom: 50px;
+    }
+    .stText {
+        color: #1E88E5;
+        font-size: 20px;
+        margin-bottom: 30px;
+    }
     .stButton button {
         background-color: #F63366;
         color: white;
         border-color: #F63366;
+        border-radius: 5px;
+        font-size: 16px;
+        padding: 10px 20px;
+        margin-top: 20px;
     }
     .stButton button:hover {
         background-color: #ED125B;
         border-color: #ED125B;
-    }
-    .stDataFrame {
-        background-color: white;
-        border: 1px solid #D3D3D3;
-        border-radius: 5px;
-        padding: 10px;
     }
     </style>
     '''
     st.markdown(page_bg, unsafe_allow_html=True)
 
     # App title and description
-    st.title('Monthly Order Demand Forecasting')
+    st.title('Demand Forecasting')
     st.markdown("Forecast future order demand using LSTM model")
+    st.markdown("---")
 
     # Sidebar
     st.sidebar.subheader("Settings")
@@ -90,52 +98,26 @@ def main():
         st.dataframe(predicted_demand.style.set_properties(**{'text-align': 'center'}))
 
         # Plot forecasted order demand over time
-        fig1 = go.Figure(data=go.Scatter(x=predicted_demand['Date'], y=predicted_demand['Order Demand'], mode='lines',
+        fig = go.Figure(data=go.Scatter(x=predicted_demand['Date'], y=predicted_demand['Order Demand'], mode='lines',
                                         name='Forecasted Demand', line=dict(color='#F63366', width=2)))
-        fig1.update_layout(
+        fig.update_layout(
             title='Forecasted Order Demand Over Time',
             xaxis_title='Date',
             yaxis_title='Order Demand',
-            plot_bgcolor='white',
-            paper_bgcolor='rgba(0,0,0,0)',
-            font_color='black'
+            plot_bgcolor='rgba(0,0,0,0)',
+            paper_bgcolor='#f0f2f5',
+            font_color='black',
+            margin=dict(l=50, r=50, t=50, b=50)
         )
-        st.plotly_chart(fig1)
-
-        # Plot distribution of order demand
-        fig2 = px.histogram(data_frame=data, x='Order_Demand', nbins=20, histnorm='probability density')
-        fig2.update_layout(
-            title='Distribution of Order Demand',
-            xaxis_title='Order Demand',
-            yaxis_title='Probability Density',
-            plot_bgcolor='white',
-            paper_bgcolor='rgba(0,0,0,0)',
-            font_color='black'
-        )
-        st.plotly_chart(fig2)
-
-        # Plot autocorrelation of order demand
-        fig3 = px.line(x=np.arange(len(data)), y=data['Order_Demand'].values, title='Autocorrelation of Order Demand')
-        fig3.update_layout(
-            xaxis_title='Lag',
-            yaxis_title='Autocorrelation',
-            plot_bgcolor='white',
-            paper_bgcolor='rgba(0,0,0,0)',
-            font_color='black'
-        )
-        st.plotly_chart(fig3)
+        st.plotly_chart(fig)
 
     # About section
-    st.markdown("---")
-    st.subheader("About")
-    st.markdown("The purpose of this app is to forecast the monthly order demand using an LSTM model.")
-    st.markdown("It addresses order shortage issues related to ocean shipping, where orders can take months or weeks to arrive.")
-    st.markdown("To use the app, enter the number of months to forecast in the sidebar and click the 'Predict' button.")
-    st.markdown("The app will generate forecasted values and display graphs for visualization.")
-
-    # Footer
-    st.markdown("---")
-    st.markdown("Developed by Gangadhar")
+    st.sidebar.markdown("---")
+    st.sidebar.subheader("About")
+    st.sidebar.markdown("The purpose of this app is to forecast the monthly order demand using an LSTM model.")
+    st.sidebar.markdown("It addresses order shortage issues related to ocean shipping, where orders can take months or weeks to arrive.")
+    st.sidebar.markdown("To use the app, enter the number of months to forecast in the sidebar and click the 'Predict' button.")
+    st.sidebar.markdown("The app will generate forecasted values and display a graph for visualization.")
 
 if __name__ == '__main__':
     main()
