@@ -8,4 +8,5 @@ seaborn
 plotly
 tensorflow
 keras
-streamlit_ace 
+streamlit_ace
+animate.css

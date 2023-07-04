@@ -7,9 +7,6 @@ import plotly.express as px
 import plotly.graph_objects as go
 from streamlit_ace import st_ace
 
-# Install additional libraries
-!pip install animate.css
-
 # Load the model
 model = load_model('lstm_model_final.h5')
 
