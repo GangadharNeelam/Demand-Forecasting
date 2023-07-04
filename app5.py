@@ -64,31 +64,40 @@ def main():
         fig.update_layout(title='Forecasted Order Demand Over Time', xaxis_title='Date', yaxis_title='Order Demand')
         st.plotly_chart(fig)
 
+        # Visual elements
+        st.subheader('Forecasting Visualizations')
+        st.markdown('Check out these visualizations related to forecasting and time series:')
+
+        # Visualization sketch
+        st.image('forecasting_sketch.jpg', use_column_width=True)
+
+        # Additional visualizations
+        st.markdown('### Seasonal Decomposition')
+        st.image('seasonal_decomposition.png', use_column_width=True)
+
+        st.markdown('### Autocorrelation Plot')
+        st.image('autocorrelation_plot.png', use_column_width=True)
+
     # About section
     about_button = st.sidebar.button("About", key='about_button')
     if about_button:
         st.header("About")
         st.markdown("### Purpose")
         st.markdown("The purpose of the app is to forecast the monthly order demand.")
-
         st.markdown("### Addressing Order Shortage")
         st.markdown("The app aims to solve order shortage issues related to ocean shipping, where orders can take months or weeks to ship.")
-
         st.markdown("### Forecasting Process")
         st.markdown("To generate forecasts, simply enter the number of months to forecast. The app will predict the order demand and provide a graph for visualization.")
-
         st.markdown("### LSTM Model")
         st.markdown("The app is powered by an LSTM (Long Short-Term Memory) model, which is a type of recurrent neural network (RNN) commonly used for sequence prediction tasks.")
-
         st.markdown("### Dataset")
         st.markdown("The app utilizes a publicly available dataset to train the LSTM model and generate accurate predictions.")
-
         st.markdown("### Target Audience")
         st.markdown("The app is designed for anyone who wants to gain a basic understanding of forecasting and its applications in order management and supply chain.")
-
         st.markdown("### Future Enhancements")
         st.markdown("In the future, we plan to expand the model's capabilities by incorporating larger datasets and advanced techniques to improve accuracy and efficiency.")
 
+    # Footer
     st.markdown('---')
     st.markdown('Developed by Gangadhar')
 
