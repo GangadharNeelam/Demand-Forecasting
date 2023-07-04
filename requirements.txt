@@ -9,4 +9,3 @@ plotly
 tensorflow
 keras
 streamlit_ace
-animate.css

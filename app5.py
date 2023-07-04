@@ -57,6 +57,21 @@ def main():
         border-radius: 5px;
         padding: 10px;
     }
+    .animated {
+        animation-duration: 1s;
+        animation-fill-mode: both;
+    }
+    .fade-in {
+        animation-name: fadeIn;
+    }
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
     </style>
     '''
     st.markdown(page_bg, unsafe_allow_html=True)
@@ -86,9 +101,13 @@ def main():
         predicted_demand.rename(columns={'index': 'Date'}, inplace=True)
         predicted_demand["Date"] = pd.to_datetime(predicted_demand["Date"]).dt.strftime('%b %Y')
 
-        # Display forecasted values
+        # Display forecasted values with fade-in animation
         st.subheader('Forecasted values:')
-        st.dataframe(predicted_demand.style.set_properties(**{'text-align': 'center'}))
+        predicted_demand_html = predicted_demand.style.set_properties(**{'text-align': 'center'}).render()
+        st.markdown(
+            f'<div class="animated fade-in">{predicted_demand_html}</div>',
+            unsafe_allow_html=True
+        )
 
         # Plot forecasted order demand over time
         fig = go.Figure(data=go.Scatter(x=predicted_demand['Date'], y=predicted_demand['Order Demand'], mode='lines',
@@ -114,7 +133,7 @@ def main():
     # Footer
     st.markdown("---")
     st.subheader("Developed by Gangadhar")
-    st.markdown("Check out the [GitHub repository](https://github.com/your-username/your-repo) for the source code.")
+    st.markdown("Check out the [GitHub repository](https://github.com/GangadharNeelam) for the source code.")
 
     # Code highlighting with streamlit_ace
     st.subheader("Source Code")
