@@ -5,7 +5,6 @@ from sklearn.preprocessing import MinMaxScaler
 from tensorflow.keras.models import load_model
 import plotly.express as px
 import plotly.graph_objects as go
-from PIL import Image
 
 # Load the model
 model = load_model('lstm_model_final.h5')
@@ -66,15 +65,14 @@ def main():
     st.markdown("Forecast future order demand using LSTM model")
 
     # Sidebar
-    st.sidebar.subheader("Navigation")
-    section = st.sidebar.radio("", ["Forecast", "About"])
+    menu_options = ['Forecast', 'About']
+    selected_option = st.sidebar.radio('Select an option', menu_options)
 
-    if section == "Forecast":
-        st.subheader("Forecast")
-        st.markdown("---")
-        st.sidebar.write("Click the button below to predict the order demand for the future months.")
+    if selected_option == 'Forecast':
+        st.subheader('Forecast')
+        st.markdown("To use the app, enter the number of months to forecast in the sidebar and click the 'Predict' button.")
         future_months = st.sidebar.number_input('Enter the number of months to forecast', min_value=1, value=6, step=1)
-        
+
         if st.sidebar.button('Predict'):
             predictions = []
             current_data = scaled_data
@@ -109,17 +107,19 @@ def main():
             )
             st.plotly_chart(fig)
 
-    elif section == "About":
-        st.subheader("About")
-        st.markdown("---")
+    elif selected_option == 'About':
+        st.subheader('About')
         st.markdown("The purpose of this app is to forecast the monthly order demand using an LSTM model.")
         st.markdown("It addresses order shortage issues related to ocean shipping, where orders can take months or weeks to arrive.")
-        st.markdown("To use the app, select the 'Forecast' section and enter the number of months to forecast in the sidebar. Click the 'Predict' button to generate forecasted values and visualize the results.")
+        st.markdown("The app will generate forecasted values and display graphs for visualization.")
 
     # Footer
     st.markdown("---")
-    st.markdown("Connect with me:")
-    st.markdown("[![LinkedIn](https://raw.githubusercontent.com/GangadharNeelam/Streamlit-Demand-Forecasting-App/main/assets/linkedin_logo.png)](https://www.linkedin.com/in/gangadhar-neelam/) [![GitHub](https://raw.githubusercontent.com/GangadharNeelam/Streamlit-Demand-Forecasting-App/main/assets/github_logo.png)](https://github.com/GangadharNeelam)")
+    st.subheader("Connect with me:")
+    github_link = "[![GitHub](github.png)](https://github.com/GangadharNeelam)"
+    linkedin_link = "[![LinkedIn](linkedin.png)](https://www.linkedin.com/in/gangadhar-neelam/)"
+    st.markdown(github_link, unsafe_allow_html=True)
+    st.markdown(linkedin_link, unsafe_allow_html=True)
 
 if __name__ == '__main__':
     main()
