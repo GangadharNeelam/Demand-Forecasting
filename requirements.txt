@@ -6,3 +6,5 @@ scikit-learn
 statsmodels
 seaborn
 plotly
+tensorflow
+keras
