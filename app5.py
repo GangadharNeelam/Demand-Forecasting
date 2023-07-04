@@ -58,7 +58,7 @@ def main():
 
         # Print the predicted order demand for the future months
         next_months_dates = pd.date_range(start=data.index[-1], periods=future_months + 1, freq='M')[1:]
-        predicted_demand = pd.DataFrame(np.round(predictions, 2), index=next_months_dates, columns=['Order Demand'])
+        predicted_demand = pd.DataFrame(np.round(predictions), index=next_months_dates, columns=['Order Demand'])
 
         predicted_demand.reset_index(inplace=True)
         predicted_demand.rename(columns={'index': 'Date'}, inplace=True)
