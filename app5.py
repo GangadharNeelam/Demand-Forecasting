@@ -108,14 +108,11 @@ def main():
             st.plotly_chart(fig)
 
     elif selected_option == 'About':
-        st.subheader("About")
-        st.markdown("### Purpose\n\nThe purpose of the app is to forecast the monthly order demand.")
-        st.markdown("### Addressing Order Shortage\n\nThe app aims to solve order shortage issues")
-        st.markdown("### Forecasting Process\n\nTo generate forecasts, simply enter the number of months to forecast. The app will predict the order demand and provide a graph for visualization.")
-        st.markdown("### LSTM Model\n\nThe app is powered by an LSTM (Long Short-Term Memory) model, which is a type of recurrent neural network (RNN) commonly used for sequence prediction tasks.")
-        st.markdown("### Dataset\n\nThe app utilizes a publicly available dataset to train the LSTM model and generate accurate predictions.")
-        st.markdown("### Target Audience\n\nThe app is designed for anyone who wants to gain a basic understanding of forecasting and its applications in order management and supply chain.")
-        st.markdown("### Future Enhancements\n\nIn the future, we plan to expand the model's capabilities by incorporating larger datasets and advanced techniques to improve accuracy and efficiency.")
+        st.subheader('About')
+        st.markdown("The purpose of this app is to forecast the monthly order demand using an LSTM model.")
+        st.markdown("It addresses order shortage issues.")
+        st.markdown("To use the app, enter the number of months to forecast in the sidebar and click the 'Predict' button.")
+        st.markdown("The app will generate forecasted values and display graphs for visualization.")
 
     # Footer
     st.markdown("---")
