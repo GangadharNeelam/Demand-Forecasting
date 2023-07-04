@@ -103,7 +103,7 @@ def main():
 
         # Display forecasted values with fade-in animation
         st.subheader('Forecasted values:')
-        predicted_demand_html = predicted_demand.style.set_properties(**{'text-align': 'center'}).render()
+        predicted_demand_html = predicted_demand.style.set_properties(text_align='center').render()
         st.markdown(
             f'<div class="animated fade-in">{predicted_demand_html}</div>',
             unsafe_allow_html=True
@@ -133,7 +133,7 @@ def main():
     # Footer
     st.markdown("---")
     st.subheader("Developed by Gangadhar")
-    st.markdown("Check out the [GitHub repository](https://github.com/GangadharNeelam) for the source code.")
+    st.markdown("Check out the [GitHub repository](https://github.com/your-username/your-repo) for the source code.")
 
     # Code highlighting with streamlit_ace
     st.subheader("Source Code")
