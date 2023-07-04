@@ -5,7 +5,6 @@ from sklearn.preprocessing import MinMaxScaler
 from tensorflow.keras.models import load_model
 import plotly.express as px
 import plotly.graph_objects as go
-from streamlit_ace import st_ace
 
 # Load the model
 model = load_model('lstm_model_final.h5')
@@ -133,20 +132,7 @@ def main():
     # Footer
     st.markdown("---")
     st.subheader("Developed by Gangadhar")
-    st.markdown("Check out the [GitHub repository](https://github.com/your-username/your-repo) for the source code.")
-
-    # Code highlighting with streamlit_ace
-    st.subheader("Source Code")
-    st_ace(
-        value=open(__file__, 'r').read(),
-        language="python",
-        theme="github",
-        keybinding="vscode",
-        show_gutter=False,
-        font_size=14,
-        use_wrap_mode=True,
-        wrap=True
-    )
+    st.markdown("Check out the [GitHub repository](https://github.com/GangadharNeelam) for the source code.")
 
 if __name__ == '__main__':
     main()
