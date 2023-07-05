@@ -115,6 +115,7 @@ def main():
             )
             st.plotly_chart(fig)
 
+
     elif selected_option == 'About':
         st.subheader('About')
         st.markdown("The purpose of this app is to forecast the monthly order demand using an LSTM model.")
