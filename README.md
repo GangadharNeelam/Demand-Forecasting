@@ -1,6 +1,7 @@
 # Demand forecasting
 
-https://github.com/GangadharNeelam/Demand_forecasting/assets/93145713/60ad4666-ab3a-400f-b823-74133cb6352f
+### Live Demo
+App : https://demand-forecasting-demo-app.streamlit.app/
 
 This Demand Forecasting App uses a SARIMA (Seasonal AutoRegressive Integrated Moving Average) model to predict monthly Orders Demand based on historical data.
 Here's the process involved in developing this app:
