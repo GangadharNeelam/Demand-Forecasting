@@ -123,7 +123,7 @@ def main():
         st.markdown("To use the app, enter the number of months to forecast in the sidebar and click the 'Predict' button.")
         st.markdown("The app will generate forecasted values and display graphs for visualization.")
 
-    # Footer
+    # Foote
     st.markdown("---")
     st.subheader("Connect with me:")
     st.markdown("[LinkedIn](https://www.linkedin.com/in/gangadhar-neelam/) | [GitHub](https://github.com/GangadharNeelam)")
