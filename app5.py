@@ -92,7 +92,7 @@ def main():
 
             # Display forecasted values
             st.subheader('Forecasted values:')
-            
+
             st.dataframe(predicted_demand.style.set_properties(**{'text-align': 'center'}))
 
     elif selected_option == 'About':
@@ -100,11 +100,11 @@ def main():
         st.markdown("The purpose of this app is to forecast the monthly order demand using an LSTM model.")
         st.markdown("It addresses order shortage issues.")
         st.markdown("To use the app, enter the number of months to forecast in the sidebar and click the 'Predict' button.")
-        st.markdown("The app will generate forecasted values and display graphs for visualization.")
+        st.markdown("The app will generate forecasted values.")
 
     # Footer
     st.markdown("---")
-    st.subheader("Connect with me:")
+    st.subheader("Connect with me: Gangadhar Neelam😊")
     st.markdown("[LinkedIn](https://www.linkedin.com/in/gangadhar-neelam/) | [GitHub](https://github.com/GangadharNeelam)")
 
 if __name__ == '__main__':
