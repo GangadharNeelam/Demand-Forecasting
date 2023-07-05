@@ -19,14 +19,8 @@ scaled_data = scaler.fit_transform(order_demand)
 seq_length = 12
 
 # Function to predict next month's order demand
-def predict_next_month(data, model, scaler, seq_length, predicted_values):
-    if len(predicted_values) < seq_length:
-        # Use the last sequence from the original data
-        last_sequence = data[-seq_length:]
-    else:
-        # Use the previously predicted values as input sequence
-        last_sequence = predicted_values[-seq_length:]
-
+def predict_next_month(data, model, scaler, seq_length):
+    last_sequence = data[-seq_length:]  # Last sequence from the data
     last_sequence = last_sequence.reshape((1, seq_length, 1))  # Reshape for prediction
     next_month_scaled = model.predict(last_sequence)
     next_month = scaler.inverse_transform(next_month_scaled)
@@ -82,17 +76,15 @@ def main():
         if st.sidebar.button('Predict'):
             predictions = []
             current_data = scaled_data
-            predicted_values = []
 
             for _ in range(future_months):
-                prediction = predict_next_month(current_data, model, scaler, seq_length, predicted_values)
+                prediction = predict_next_month(current_data, model, scaler, seq_length)
                 predictions.append(prediction)
                 current_data = np.concatenate((current_data[1:], prediction.reshape(-1, 1)))
-                predicted_values.append(prediction)
 
             # Print the predicted order demand for the future months
             next_months_dates = pd.date_range(start=data.index[-1], periods=future_months + 1, freq='M')[1:]
-            predicted_demand = pd.DataFrame(np.round(predictions, 2), index=next_months_dates, columns=['Order Demand'])
+            predicted_demand = pd.DataFrame(np.round(predictions), index=next_months_dates, columns=['Order Demand'])
 
             predicted_demand.reset_index(inplace=True)
             predicted_demand.rename(columns={'index': 'Date'}, inplace=True)
@@ -100,21 +92,8 @@ def main():
 
             # Display forecasted values
             st.subheader('Forecasted values:')
+            
             st.dataframe(predicted_demand.style.set_properties(**{'text-align': 'center'}))
-
-            # Plot forecasted order demand over time
-            fig = go.Figure(data=go.Scatter(x=predicted_demand['Date'], y=predicted_demand['Order Demand'], mode='lines',
-                                            name='Forecasted Demand', line=dict(color='#F63366', width=2)))
-            fig.update_layout(
-                title='Forecasted Order Demand Over Time',
-                xaxis_title='Date',
-                yaxis_title='Order Demand',
-                plot_bgcolor='white',
-                paper_bgcolor='rgba(0,0,0,0)',
-                font_color='black'
-            )
-            st.plotly_chart(fig)
-
 
     elif selected_option == 'About':
         st.subheader('About')
@@ -123,7 +102,7 @@ def main():
         st.markdown("To use the app, enter the number of months to forecast in the sidebar and click the 'Predict' button.")
         st.markdown("The app will generate forecasted values and display graphs for visualization.")
 
-    # Foote
+    # Footer
     st.markdown("---")
     st.subheader("Connect with me:")
     st.markdown("[LinkedIn](https://www.linkedin.com/in/gangadhar-neelam/) | [GitHub](https://github.com/GangadharNeelam)")
