@@ -62,14 +62,14 @@ def main():
 
     # App title and description
     st.title('Monthly Order Demand Forecasting')
-    st.markdown("Forecast future order demand using LSTM model")
+    # st.markdown("Forecast future order demand using LSTM model")
 
     # Sidebar
     st.sidebar.subheader('Options')
     selected_option = st.sidebar.radio('Select an option', ('Forecast', 'About'))
 
     if selected_option == 'Forecast':
-        st.subheader('Forecast')
+        # st.subheader('Forecast')
         st.markdown("To use the app, enter the number of months to forecast in the sidebar and click the 'Predict' button.")
         future_months = st.sidebar.number_input('Enter the number of months to forecast', min_value=1, value=6, step=1)
 
@@ -103,8 +103,10 @@ def main():
         st.markdown("The app will generate forecasted values.")
 
     # Footer
+    st.markdown('---')
+    st.markdown('Developed by Gangadhar Neelam')
     st.markdown("---")
-    st.subheader("Connect with me: Gangadhar Neelam😊")
+    st.subheader("Connect with me: ")
     st.markdown("[LinkedIn](https://www.linkedin.com/in/gangadhar-neelam/) | [GitHub](https://github.com/GangadharNeelam)")
 
 if __name__ == '__main__':
